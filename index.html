@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogisticsPro - Indian Export & Logistics Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent: #f59e0b;
+            --neutral-light: #f8fafc;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--neutral-light);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "📦";
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideInUp 0.7s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== IMAGE SLIDER (AUTOMATIC SCROLLING) ===== */
+        .slider-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .slider-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            animation: autoScroll 20s linear infinite;
+        }
+
+        .slider:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .slide {
+            min-width: 400px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            margin: 0 1rem;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8));
+            border-radius: 10px;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .slide-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .slide:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slide:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slide:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .slide:nth-child(5) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .slide:nth-child(6) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide:nth-child(7) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slide:nth-child(8) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slide:nth-child(9) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .slide:nth-child(10) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .slider-hint {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* ===== SERVICES SECTION WITH HOVER POPUPS ===== */
+        .services {
+            padding: 4rem 2rem;
+            background: var(--neutral-light);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+        }
+
+        /* POPUP TOOLTIP */
+        .popup {
+            position: absolute;
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 90%;
+            max-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card:hover .popup {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-15px);
+        }
+
+        .popup::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--primary);
+        }
+
+        .popup h4 {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .popup ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .popup li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .popup li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* ===== COLOR-CHANGING EFFECT ===== */
+        .content-section {
+            padding: 4rem 2rem;
+            background: white;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.2), rgba(59, 130, 246, 0.2));
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .highlight:hover {
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.4), rgba(59, 130, 246, 0.4));
+            transform: scale(1.05);
+            display: inline-block;
+        }
+
+        /* AUTOMATIC COLOR CHANGING BOX */
+        .color-box {
+            display: inline-block;
+            padding: 1.5rem 2.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-weight: bold;
+            color: white;
+            animation: colorShift 4s ease-in-out infinite;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes colorShift {
+            0% {
+                background: linear-gradient(135deg, var(--primary), var(--primary-light));
+                transform: scale(1);
+            }
+
+            50% {
+                background: linear-gradient(135deg, var(--accent), #d97706);
+                transform: scale(1.05);
+            }
+
+            100% {
+                background: linear-gradient(135deg, var(--primary), var(--primary-light));
+                transform: scale(1);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .slide {
+                min-width: 300px;
+                height: 250px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .popup {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .slide {
+                min-width: 250px;
+                height: 200px;
+            }
+
+            .slide-icon {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">LogisticsPro</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#slider">Services</a></li>
+                    <li><a href="#services">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>Global Logistics Solutions</h1>
+        <p>Streamline your export business with India's most trusted logistics partner</p>
+        <button class="cta-button">Get Started Today</button>
+    </section>
+
+    <!-- IMAGE SLIDER (AUTOMATIC SCROLLING) -->
+    <section class="slider-section" id="slider">
+        <h2>Our Services Portfolio</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">🚢</div>
+                        <h3>Ocean Freight</h3>
+                        <p>Reliable international shipping</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">✈️</div>
+                        <h3>Air Cargo</h3>
+                        <p>Fast-track delivery worldwide</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">🚚</div>
+                        <h3>Ground Transport</h3>
+                        <p>Efficient domestic logistics</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">📦</div>
+                        <h3>Warehousing</h3>
+                        <p>Secure storage solutions</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">📋</div>
+                        <h3>Customs Clearance</h3>
+                        <p>Hassle-free documentation</p>
+                    </div>
+                </div>
+
+
+                <!-- Duplicates for seamless loop -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">🚢</div>
+                        <h3>Ocean Freight</h3>
+                        <p>Reliable international shipping</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">✈️</div>
+                        <h3>Air Cargo</h3>
+                        <p>Fast-track delivery worldwide</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">🚚</div>
+                        <h3>Ground Transport</h3>
+                        <p>Efficient domestic logistics</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">📦</div>
+                        <h3>Warehousing</h3>
+                        <p>Secure storage solutions</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <div class="slide-icon">📋</div>
+                        <h3>Customs Clearance</h3>
+                        <p>Hassle-free documentation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="slider-hint">💡 Hover over the slider to pause automatic scrolling</p>
+    </section>
+
+    <!-- SERVICES CARDS WITH HOVER POPUPS -->
+    <section class="services" id="services">
+        <h2>Why Choose LogisticsPro?</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Fast Delivery</h3>
+                <p>Get your goods delivered on time, every time with our optimized routes.</p>
+                <div class="popup">
+                    <h4>Fast Delivery Benefits</h4>
+                    <ul>
+                        <li>Real-time tracking available</li>
+                        <li>Express shipping options</li>
+                        <li>Optimized route planning</li>
+                        <li>On-time guarantee</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Secure Handling</h3>
+                <p>Your cargo is protected with comprehensive insurance and careful handling.</p>
+                <div class="popup">
+                    <h4>Security Features</h4>
+                    <ul>
+                        <li>100% safety guaranteed</li>
+                        <li>Full insurance coverage</li>
+                        <li>Temperature control</li>
+                        <li>24/7 monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Competitive Pricing</h3>
+                <p>Best rates in the industry without compromising on quality of service.</p>
+                <div class="popup">
+                    <h4>Pricing Advantages</h4>
+                    <ul>
+                        <li>Get a free quote today</li>
+                        <li>No hidden charges</li>
+                        <li>Flexible payment terms</li>
+                        <li>Volume discounts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🌍</div>
+                <h3>Global Network</h3>
+                <p>Connected to 150+ countries with local expertise in every region.</p>
+                <div class="popup">
+                    <h4>Network Coverage</h4>
+                    <ul>
+                        <li>Worldwide coverage</li>
+                        <li>Local partnerships</li>
+                        <li>Multi-modal transport</li>
+                        <li>Door-to-door service</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock customer support to assist with any logistics needs.</p>
+                <div class="popup">
+                    <h4>Support Services</h4>
+                    <ul>
+                        <li>Chat with us anytime</li>
+                        <li>Dedicated account manager</li>
+                        <li>Multilingual support</li>
+                        <li>Emergency assistance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <h3>Certified Partner</h3>
+                <p>ISO certified with years of experience in international trade.</p>
+                <div class="popup">
+                    <h4>Certifications</h4>
+                    <ul>
+                        <li>Industry leader since 2010</li>
+                        <li>ISO 9001:2015 certified</li>
+                        <li>Government approved</li>
+                        <li>Award-winning service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="content-section" id="about">
+        <h2>About LogisticsPro</h2>
+        <p>
+            LogisticsPro is India's premier logistics and export solutions provider, specializing in
+            <span class="highlight">seamless international shipping</span> for businesses of all sizes.
+        </p>
+        <p>
+            With over a decade of experience, we've helped thousands of Indian exporters reach markets
+            across the globe. Our <span class="highlight">state-of-the-art infrastructure</span> and
+            dedicated team ensure your cargo arrives safely and on schedule.
+        </p>
+        <p>
+            Whether you're shipping textiles, electronics, pharmaceuticals, or agricultural products,
+            we have the &emsp;&emsp;&emsp;&emsp;&emsp;<span class="highlight">expertise and resources</span> to
+            handle your
+            logistics needs
+            efficiently.
+        </p>
+
+        <div class="color-box">
+            ✨ Experience the LogisticsPro Difference ✨
+        </div>
+
+        <p>
+            Our commitment to <span class="highlight">innovation and customer satisfaction</span>
+            makes us the trusted choice for export businesses across India. Join thousands of satisfied clients
+            who have transformed their international trade operations with our comprehensive solutions.
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <p>&copy; 2025 LogisticsPro. All rights reserved.</p>
+        <p>📧 Email: info@logisticspro.com | 📞 Phone: +91-xxxx-xxx-xxx</p>
+        <p>🌐 Connecting India to the World</p>
+    </footer>
+
+    <script src="script.js">
+
+    </script>
+</body>
+
+</html>
